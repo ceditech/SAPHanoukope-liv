@@ -5,7 +5,8 @@ import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrl: './navbar.component.css',
+  standalone: false,
 })
 export class NavbarComponent implements OnInit {
 
@@ -26,7 +27,7 @@ export class NavbarComponent implements OnInit {
     dropdowns.forEach(dropdown => {
       dropdown.classList.remove('show');
     });
-    
+
     // Remove show class from parent dropdown items
     const dropdownItems = document.querySelectorAll('.nav-item.dropdown');
     dropdownItems.forEach(item => {
@@ -39,7 +40,7 @@ export class NavbarComponent implements OnInit {
     const dropdown = document.querySelectorAll('.nav-item.dropdown')[index];
     if (dropdown) {
       dropdown.classList.toggle('show');
-      
+
       // Close other dropdowns
       const allDropdowns = document.querySelectorAll('.nav-item.dropdown');
       allDropdowns.forEach((item, i) => {
