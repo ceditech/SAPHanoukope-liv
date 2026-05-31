@@ -60,23 +60,39 @@
   padding: 0;
 }
 
+/* Header Bleeding Padding Fixes */
+.modern-navbar .navbar,
+.modern-navbar .container-fluid {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
 .navbar-nav-modern {
   display: flex;
   align-items: center;
+  justify-content: center; /* Center menu items elegantly */
   width: 100%;
 }
 
 .nav-item-modern {
-  margin: 0 5px;
+  margin: 0;
   position: relative;
+  height: 80px; /* Stretch parent item to match brand header height */
+  display: flex;
+  align-items: center;
 }
 
 .nav-link-modern {
   font-family: 'Novecento Sans', 'Raleway', sans-serif;
-  font-weight: 500;
-  font-size: 1rem;
+  font-weight: 600;
+  font-size: 0.95rem;
   color: #f8f9fa !important;
-  padding: 30px 15px;
+  height: 100%; /* Stretch to full height of header */
+  padding: 0 18px; /* Elegant side padding */
+  display: flex;
+  align-items: center;
   transition: all 0.3s ease;
   position: relative;
   text-transform: uppercase;
@@ -84,64 +100,58 @@
 }
 
 .nav-link-modern:hover,
-.nav-link-modern:focus {
-  color: #e6b800 !important;
-  background: rgba(255, 255, 255, 0.1);
+.nav-link-modern:focus,
+.nav-item-modern:hover .nav-link-modern {
+  color: #ffffff !important; /* Elegant white for hover text */
+  background-color: #e6b800 !important; /* Gold background spans full height */
 }
 
 .nav-link-modern::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 3px;
-  background: #e6b800;
-  transition: all 0.3s ease;
-  transform: translateX(-50%);
-}
-
-.nav-link-modern:hover::after,
-.nav-item-modern.active .nav-link-modern::after {
-  width: 70%;
+  display: none !important; /* Remove line since background spans full height */
 }
 
 /* Dropdown Styles */
-.dropdown-menu-modern {
-  background: #2c3e50;
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  padding: 10px 0;
-  margin-top: 0;
+.dropdown-menu-modern,
+.navbar .dropdown ul {
+  position: absolute !important;
+  top: 100% !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important; /* Center dropdown under the menu item */
+  min-width: 240px !important;
+  background: #1a2a3a !important; /* Site brand deep blue */
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
+  padding: 8px 0 !important;
+  margin-top: 0 !important;
   animation: dropdownFadeIn 0.3s ease;
 }
 
 @keyframes dropdownFadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translate(-50%, 10px) !important;
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate(-50%, 0) !important;
   }
 }
 
 .dropdown-item-modern {
   font-family: 'Novecento Sans', 'Raleway', sans-serif;
-  font-weight: 400;
-  color: #f8f9fa;
-  padding: 10px 20px;
+  font-weight: 500;
+  color: #f8f9fa !important;
+  padding: 10px 24px !important;
   transition: all 0.2s ease;
   text-transform: none;
 }
 
 .dropdown-item-modern:hover,
 .dropdown-item-modern:focus {
-  background: rgba(230, 184, 0, 0.2);
-  color: #e6b800;
+  background: #e6b800 !important; /* Gold item hover */
+  color: #ffffff !important; /* White text on item hover */
 }
 
 /* Mobile Styles */
@@ -149,15 +159,19 @@
   .navbar-nav-modern {
     flex-direction: column;
     align-items: flex-start;
+    justify-content: flex-start;
   }
 
   .nav-item-modern {
     width: 100%;
     margin: 0;
+    height: auto;
   }
 
   .nav-link-modern {
     padding: 15px 20px;
+    height: auto;
+    width: 100%;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
@@ -165,11 +179,15 @@
     display: none;
   }
 
-  .dropdown-menu-modern {
-    background: rgba(44, 62, 80, 0.9);
-    box-shadow: none;
-    border-radius: 0;
-    margin-top: 0;
+  .dropdown-menu-modern,
+  .navbar .dropdown ul {
+    position: static !important;
+    transform: none !important;
+    left: auto !important;
+    background: rgba(44, 62, 80, 0.9) !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    margin-top: 0 !important;
   }
 
   .dropdown-toggle-modern::after {
@@ -183,6 +201,11 @@
 /* Active state */
 .nav-item-modern.active .nav-link-modern {
   color: #e6b800 !important;
+}
+
+.nav-item-modern.active:hover .nav-link-modern,
+.nav-item-modern.active .nav-link-modern:hover {
+  color: #ffffff !important; /* Change active text color to white on hover */
 }
 
 /* Responsive adjustments */
