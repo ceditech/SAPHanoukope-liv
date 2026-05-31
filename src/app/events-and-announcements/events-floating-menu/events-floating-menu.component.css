@@ -1,7 +1,7 @@
 /* Container */
 .floating-drawer-nav {
   position: fixed;
-  right: 0;
+  right: 0; /* Position on the right side */
   left: auto;
   top: 55%;
   transform: translateY(-50%);
@@ -29,32 +29,35 @@
 /* Link wrapper */
 .drawer-link {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row-reverse; /* Icons on the right, content on the left when expanded */
   align-items: center;
   text-decoration: none;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-right: none;
+  /* Premium Glassmorphic White Transparent Background */
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-right: none; /* No border on the right edge of screen */
   color: #1a2a3a;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-  box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.08);
   width: 50px;
   height: 50px;
   overflow: hidden;
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s, box-shadow 0.3s;
   outline: none;
 }
 
+/* Hover/Focus slide out */
 .drawer-link:hover,
 .drawer-link:focus,
 .drawer-link:focus-within {
-  width: 280px;
-  background: rgba(255, 255, 255, 0.45);
+  width: 320px;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
 }
 
 /* Icon */
@@ -71,28 +74,31 @@
 
 /* Active State */
 .drawer-link.active-item {
-  background: rgba(255, 255, 255, 0.35);
-  border-left: 4px solid #e6b800;
+  background: rgba(255, 255, 255, 0.3);
+  border-left: 4px solid #e6b800; /* Gold left border */
 }
 .drawer-link.active-item .drawer-icon-wrapper {
-  color: #e6b800;
+  color: #e6b800; /* Gold icon */
 }
 .drawer-link.active-item:hover,
 .drawer-link.active-item:focus {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.45);
 }
 
-/* Drawer content */
+/* Content details (label & description) */
 .drawer-content {
   display: flex;
   flex-direction: column;
-  padding-left: 16px;
+  padding-left: 12px;
   padding-right: 8px;
   opacity: 0;
   white-space: nowrap;
   transition: opacity 0.2s ease;
   pointer-events: none;
   flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-align: left;
 }
 
 .drawer-link:hover .drawer-content,
@@ -107,28 +113,38 @@
   font-weight: 600;
   font-size: 0.95rem;
   color: #1a2a3a;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 }
 .drawer-link.active-item .drawer-label {
-  color: #b8860b;
+  color: #b8860b; /* Goldenrod/darker yellow for readability on white bg */
 }
 
 .drawer-desc {
   font-size: 0.75rem;
   color: #4a5568;
   margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 }
 
+/* Focus indicator for keyboard accessibility */
 .drawer-link:focus-visible {
   box-shadow: 0 0 0 3px rgba(230, 184, 0, 0.6);
 }
 
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .drawer-link {
     transition: none;
   }
 }
 
-/* Mobile bottom bar */
+/* Responsive Mobile Layout (Bottom bar remains at bottom) */
 @media (max-width: 768px) {
   .floating-drawer-nav {
     position: fixed;
@@ -145,7 +161,6 @@
     border-top: 2px solid #e6b800;
     padding: 6px 0;
     z-index: 1000;
-    align-items: center;
   }
 
   .drawer-list {
